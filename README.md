@@ -90,148 +90,6 @@ module.exports = {
 "deploy": "sam-launchpad --skip-package --skip-build --skip-coverage --skip-validation"
 ```
 
-## Configuration
-
-#### project_name
-
-Required `yes`
-
-Required for naming the Cloud Formation. If you deploy `my-test-app` that has a sub project named `core` to `--stage qa` the resulting stack name would be `my-test-app-core-qa`.
-
-
-#### base_path
-
-Required `yes`
-
-Directory were all your sub projects are stored (even if you only have 1 project). The sub directories of this path will be treated as sub projects.
-
-For example if you define this `base_path`.
-```
-  ...
-  "base_path" : join( __dirname , "./serverless" )
-  ...
-```
-
-Your structure could look similar to this example:
-```
-my-serverless-project/
-├── ...
-└── serverless/
-    ├── core
-    │   ├── template.yaml
-    └── secondary-project
-        └── template.yaml
-```
-
-#### Commands
-
-Required `yes`
-
-You should provide both `test` and `build` commands if you plan on using the recursive execution of these tasks.
-
-## Options
-
-#### stage
-
-Default `dev`
-
-```
-sam-launchpad --stage qa
-```
-
-#### skip-build
-
-Default `false`
-Skips build process
-
-```
-sam-launchpad --skip-build
-```
-
-#### skip-validation
-
-Default `false`
-Skips validation process
-
-```
-sam-launchpad --skip-validation
-```
-
-#### skip-package
-
-Default `false`
-Skips packaging process
-
-```
-sam-launchpad --skip-package
-```
-
-#### skip-deploy
-
-Default `false`
-Skips deployment process
-
-```
-sam-launchpad --skip-deploy
-```
-
-#### skip-coverage
-
-Default `false`
-Skips deployment process
-
-```
-sam-launchpad --skip-coverage
-```
-
-#### app
-
-Default `[]`
-
-```
-sam-launchpad --app core
-```
-
-```
-sam-launchpad --app core --app secondary-apps
-```
-
-#### all-apps
-
-Default if app is not provided `true`
-
-```
-sam-launchpad --all-apps
-```
-
-```
-sam-launchpad --all-apps false
-```
-
-#### verbose
-
-Default `false`
-
-```
-sam-launchpad --verbose
-```
-
-
-## Project structure
-
-### Why? My take on serverless
-Serverless projects are often service centered and function oriented. Such modularity calls for a mindful separation of concerns.
-Creating a new serverless project for each module of functionality might not be necessary, it could downgrade performance, increase financial costs and time spent on maintainability.
-
-On the other hand if you don't modularize enough you might end up with a monolithic piece of software. This should be self-explanatory, monolithic architectures and serverless are like oil and water. Putting in some examples: Serverless scales with each use, if you need to spin a bunch of modules just to access an specific functionality you'll be unnecessarily incrementing the time required for completing said operation (thus downgrading performance and increasing costs).
-
-For deployment of new features and code, with AWS you update or create stacks using Cloud Formation, having coupled code means that you'll have to deploy everything every time.
-
-### Using sub-projects. Finding the balance is key
-How to find the balance when splitting your code into: libraries, lambda functions and sub-projects is up to the developers and the project nature.
-The root project works as a wrapper for all the sub-projects, providing automation scripts for recurrent tasks (building, testing, validating templates, packaging projects and deploying with SAM).
-
-
 ## Creating a sub-project
 - Sub-projects should be located directly under the base path directory specified in the configuration file.
 - A SAM `template.yaml` file is expected on the proejct root directory.
@@ -264,14 +122,142 @@ Using multiple stacks is recommended [multi stack approach](https://hackernoon.c
 
 
 ## Configuration
-At `./config/base.js` you can provide additional configuration for the automation scripts (`./scripts`). For this project there are two required fields to complete:
-
-### base_path
-Default `/serverless`
-
-Provides a root directory to look up for sub-projects.
 
 ### project_name
-Default `""`
 
-Necessary for naming Cloud Formation stacks. Useful for naming resources (Lambda functions, API , Database and such).
+Required `yes`
+
+Required for naming the Cloud Formation. If you deploy `my-test-app` that has a sub project named `core` to `--stage qa` the resulting stack name would be `my-test-app-core-qa`.
+
+
+### base_path
+
+Required `yes`
+
+Directory were all your sub projects are stored (even if you only have 1 project). The sub directories of this path will be treated as sub projects.
+
+For example if you define this `base_path`.
+```
+  ...
+  "base_path" : join( __dirname , "./serverless" )
+  ...
+```
+
+Your structure could look similar to this example:
+```
+my-serverless-project/
+├── ...
+└── serverless/
+    ├── core
+    │   ├── template.yaml
+    └── secondary-project
+        └── template.yaml
+```
+
+#### Commands
+
+Required `yes`
+
+You should provide both `test` and `build` commands if you plan on using the recursive execution of these tasks.
+
+## Options
+
+### stage
+
+Default `dev`
+
+```
+sam-launchpad --stage qa
+```
+
+### skip-build
+
+Default `false`
+Skips build process
+
+```
+sam-launchpad --skip-build
+```
+
+### skip-validation
+
+Default `false`
+Skips validation process
+
+```
+sam-launchpad --skip-validation
+```
+
+### skip-package
+
+Default `false`
+Skips packaging process
+
+```
+sam-launchpad --skip-package
+```
+
+### skip-deploy
+
+Default `false`
+Skips deployment process
+
+```
+sam-launchpad --skip-deploy
+```
+
+### skip-coverage
+
+Default `false`
+Skips deployment process
+
+```
+sam-launchpad --skip-coverage
+```
+
+### app
+
+Default `[]`
+
+```
+sam-launchpad --app core
+```
+
+```
+sam-launchpad --app core --app secondary-apps
+```
+
+### all-apps
+
+Default if app is not provided `true`
+
+```
+sam-launchpad --all-apps
+```
+
+```
+sam-launchpad --all-apps false
+```
+
+### verbose
+
+Default `false`
+
+```
+sam-launchpad --verbose
+```
+
+
+## Project structure
+
+### Why? My take on serverless
+Serverless projects are often service centered and function oriented. Such modularity calls for a mindful separation of concerns.
+Creating a new serverless project for each module of functionality might not be necessary, it could downgrade performance, increase financial costs and time spent on maintainability.
+
+On the other hand if you don't modularize enough you might end up with a monolithic piece of software. This should be self-explanatory, monolithic architectures and serverless are like oil and water. Putting in some examples: Serverless scales with each use, if you need to spin a bunch of modules just to access an specific functionality you'll be unnecessarily incrementing the time required for completing said operation (thus downgrading performance and increasing costs).
+
+For deployment of new features and code, with AWS you update or create stacks using Cloud Formation, having coupled code means that you'll have to deploy everything every time.
+
+### Using sub-projects. Finding the balance is key
+How to find the balance when splitting your code into: libraries, lambda functions and sub-projects is up to the developers and the project nature.
+The root project works as a wrapper for all the sub-projects, providing automation scripts for recurrent tasks (building, testing, validating templates, packaging projects and deploying with SAM).
