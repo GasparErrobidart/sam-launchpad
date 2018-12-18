@@ -8,7 +8,7 @@ my-serverless-project/
 ├── package.json
 ├── README.md
 ├── sam-launchpad.config.js
-└── serverless/
+└── projects/
     ├── user-authenticator
     │   ├── template.yaml
     └── user-file-processor
@@ -52,8 +52,8 @@ You are ready to start.
 const join = require('path').join;
 
 module.exports = {
-  "project_name" : "portal-driver-serverless",
-  "base_path" : join( __dirname , "./serverless" ),
+  "project_name" : "my-serverless-app",
+  "base_path" : join( __dirname , "./projects" ),
   "commands" : {
     /*
       This commands will be executed once per project in it's local context.
@@ -112,8 +112,8 @@ Globals: ...
 ```
 - Parameter variables are the recommended way for creating multiple stages.
 - The name of said folder will be used as suffix in the Cloud Formation stack name.
-- If you plan on using the root automation script for building, you must provide a package.json file specifying a `build` script.
-- If you plan on using the root automation script for testing, you must provide a package.json file specifying a `test` script.
+- If you plan on using the root automation script for building, you must provide the right context on your project to execute the `build` command you provided on the configuration.
+- If you plan on using the root automation script for running tests, you must provide the right context on your project to execute the `test` command you provided on the configuration.
 
 ### Multi stack
 Using multiple stacks is recommended [multi stack approach](https://hackernoon.com/managing-multi-environment-serverless-architecture-using-aws-an-investigation-6cd6501d261e).
@@ -139,7 +139,7 @@ Directory were all your sub projects are stored (even if you only have 1 project
 For example if you define this `base_path`.
 ```
   ...
-  "base_path" : join( __dirname , "./serverless" )
+  "base_path" : join( __dirname , "./projects" )
   ...
 ```
 
@@ -147,12 +147,16 @@ Your structure could look similar to this example:
 ```
 my-serverless-project/
 ├── ...
-└── serverless/
+└── projects/
     ├── core
     │   ├── template.yaml
     └── secondary-project
         └── template.yaml
 ```
+
+### projects
+
+An alias for `base_path`.
 
 #### Commands
 

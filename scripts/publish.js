@@ -8,6 +8,8 @@ const package       =   require('./package');
 const deploy        =   require('./deploy');
 let config          =   require(join( process.cwd() , 'sam-launchpad.config' ));
 
+if(config.projects) config.base_path = config.projects;
+
 (async ()=>{
 
   let apps = argv.app || [];
