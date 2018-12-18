@@ -1,0 +1,49 @@
+const options     = require('./options');
+const onCompleted = require('./on-completed');
+const exec        = require('child_process').exec;
+const colors      = require('colors');
+const getStack    = require('./get-stack');
+
+
+/**
+  deploy() : Uses AWS SAM for deploying a project.
+*/
+
+function deploy(opts){
+
+  return new Promise((resolve,reject)=>{
+
+    let { args, apps, config } = options(opts);
+    let completed = 0;
+    let errors = [];
+
+    console.log("\n",`  DEPLOYING TO CLOUDFORMATION  `.bgYellow.black,"\n");
+
+    apps.forEach(app=>{
+      let stackName = `${config.project_name}-${app}-${args.environment}`.replace(/[\W_]+/gi,'-').replace(/\-$/gi,'');
+      exec(`sam deploy --template-file ${config.base_path}/${app}/packaged-${args.environment}.yaml --stack-name ${stackName} --capabilities CAPABILITY_IAM --parameter-overrides Environment=${args.environment} ProjectName=${config.project_name}`,
+      async (error, stdout, stderr) => {
+
+          if (error !== null) {
+            console.log(`  ✖ ${app}  `.red);
+            errors.push({app,error,stderr});
+          }else{
+            console.log(`  ✔ ${app}  `.green);
+            let stack = await getStack(stackName);
+            console.log(stack.Outputs);
+          }
+
+          completed++;
+
+          // ON FINISH
+          if(completed == apps.length){
+            onCompleted({ errors, args, apps });
+            resolve(errors);
+          }
+
+      })  // <---- Exec end
+    })  // <---- For each end
+  }) // <---- Promise end
+} // <---- deploy() end
+
+module.exports = deploy;

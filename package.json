@@ -1,0 +1,36 @@
+{
+  "name": "sam-launchpad",
+  "version": "1.0.1",
+  "description": "A simplified interface for automating common tasks for AWS SAM.",
+  "main": "index.js",
+  "bin": {
+    "sam-launchpad": "./scripts/publish.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "Amazon",
+    "AWS",
+    "SAM",
+    "Serverless",
+    "CloudFormation",
+    "build",
+    "test",
+    "validate",
+    "deploy"
+  ],
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/GasparErrobidart/sam-launchpad"
+  },
+  "author": "Gaspar G. Errobidart",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "colors": "^1.3.3"
+  }
+}
