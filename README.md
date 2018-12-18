@@ -53,7 +53,7 @@ const join = require('path').join;
 
 module.exports = {
   "project_name" : "my-serverless-app",
-  "base_path" : join( __dirname , "./projects" ),
+  "projects" : join( __dirname , "./projects" ),
   "commands" : {
     /*
       This commands will be executed once per project in it's local context.
