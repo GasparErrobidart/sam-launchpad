@@ -43,12 +43,12 @@ You are ready to start.
 
 ## Quickstart
 
-Install SAM-Launchpad in your project `npm install sam-launchpad --save-dev`
+- Install SAM-Launchpad in your project `npm install sam-launchpad --save-dev`
 
-Create a configuration file `sam-launchpad.config.js` in your root directory.
+- Create a configuration file `sam-launchpad.config.js` in your root directory.
 
 ```
-// /sam-launchpad.config.js
+// sam-launchpad.config.js
 const join = require('path').join;
 
 module.exports = {
@@ -65,14 +65,28 @@ module.exports = {
 }
 ```
 
+- If you run `sam-launchpad` it will `build` and `test` each of your projects with the commands you provided on the config. After that it'll continue `validating`, `packaging` and `deploying` using `sam-cli` commands.
+
+- If you installed SAM-Launchpad locally in your project you can run it using `npm` or `/node_modules/bin/launch-pad`.
+
+- If you installed it globally in your machine just run `sam-launchpad`.
+
+- There are several options you can provide to skip unwanted parts of the process, you can read more about this below.
+
 ## Cheat sheet
 
 ```
+// Run the whole thing
 "publish": "sam-launchpad",
+// Just build
 "build": "sam-launchpad --skip-deploy --skip-package --skip-coverage --skip-validation",
+// Just run tests
 "test": "sam-launchpad --skip-deploy --skip-package --skip-validation --skip-build",
+// Just validate the SAM templates
 "validate": "sam-launchpad --skip-deploy --skip-package --skip-coverage --skip-build",
+// Just run SAM package
 "package": "sam-launchpad --skip-deploy --skip-build --skip-coverage --skip-validation",
+//Just deploy to Cloud Formation using SAM
 "deploy": "sam-launchpad --skip-package --skip-build --skip-coverage --skip-validation"
 ```
 
