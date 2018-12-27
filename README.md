@@ -47,7 +47,7 @@ You are ready to start.
 
 - Create a configuration file `sam-launchpad.config.js` in your root directory.
 
-```
+```javascript
 // sam-launchpad.config.js
 const join = require('path').join;
 
@@ -75,7 +75,8 @@ module.exports = {
 
 ## Cheat sheet
 
-```
+```javascript
+{
 // Run the whole thing
 "publish": "sam-launchpad",
 // Just build
@@ -88,13 +89,14 @@ module.exports = {
 "package": "sam-launchpad --skip-deploy --skip-build --skip-coverage --skip-validation",
 //Just deploy to Cloud Formation using SAM
 "deploy": "sam-launchpad --skip-package --skip-build --skip-coverage --skip-validation"
+}
 ```
 
 ## Creating a sub-project
 - Sub-projects should be located directly under the base path directory specified in the configuration file.
 - A SAM `template.yaml` file is expected on the proejct root directory.
 - Templates should define two basic parameters, `Environment` and `ProjectName`:
-```
+```yaml
 // /template.yaml
 AWSTemplateFormatVersion: ...
 Transform: AWS::Serverless-2016-10-31
@@ -137,7 +139,7 @@ Required `yes`
 Directory were all your sub projects are stored (even if you only have 1 project). The sub directories of this path will be treated as sub projects.
 
 For example if you define this `base_path`.
-```
+```javascript
   ...
   "base_path" : join( __dirname , "./projects" )
   ...
@@ -264,7 +266,7 @@ sam-launchpad --verbose
 ## Hooks
 
 You can provide additional functions to execute before and after each step:
-```
+```javascript
 // sam-launchpad.config.js
 const join = require('path').join;
 
