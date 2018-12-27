@@ -176,16 +176,6 @@ Default `dev`
 sam-launchpad --stage qa
 ```
 
-### s3-bucket
-
-Default `${this.project_name}`
-Provide a bucket name where your Lambda code will be deployed, default is the project's name.
-
-### s3-prefix
-
-Default `${this.environment/this.app}`
-Provide an s3-prefix where your Lambda code will be deployed.
-
 ### skip-build
 
 Default `false`
