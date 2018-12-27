@@ -7,6 +7,7 @@ const validate      =   require('./validate');
 const package       =   require('./package');
 const deploy        =   require('./deploy');
 const options       =   require('./options');
+const hook          =   require('./hook');
 let config          =   require(join( process.cwd() , 'sam-launchpad.config' ));
 
 if(config.projects) config.base_path = config.projects;
