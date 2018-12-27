@@ -7,7 +7,7 @@ const validate      =   require('./validate');
 const package       =   require('./package');
 const deploy        =   require('./deploy');
 const options       =   require('./options');
-const hook          =   require('./hook');
+const hook         =   require('./hook');
 let config          =   require(join( process.cwd() , 'sam-launchpad.config' ));
 
 if(config.projects) config.base_path = config.projects;
@@ -30,33 +30,33 @@ if(config.projects) config.base_path = config.projects;
 
 
   // UNIT TESTS
-  opts = await hook( 'before-coverage' , opts );
-  if(!argv['skip-coverage']) opts = (await coverage(opts)) || opts;
-  opts = await hook( 'after-coverage' , opts );
+  await hook( 'before-coverage' , opts );
+  if(!argv['skip-coverage']) (await coverage(opts)) || opts;
+  await hook( 'after-coverage' , opts );
 
 
   // BUILD
-  opts = await hook('before-build' , opts);
-  if(!argv['skip-build'])    opts = (await build(opts)) || opts;
-  opts = await hook('after-build' , opts);
+  await hook('before-build' , opts);
+  if(!argv['skip-build'])    (await build(opts)) || opts;
+  await hook('after-build' , opts);
 
 
   // SAM TEMPLATE VALIDATION
-  opts = await hook('before-validation' , opts);
-  if(!argv['skip-validation']) opts = (await validate(opts)) || opts;
-  opts = await hook('after-validation' , opts);
+  await hook('before-validation' , opts);
+  if(!argv['skip-validation']) (await validate(opts)) || opts;
+  await hook('after-validation' , opts);
 
 
   // SAM PACKAGE
-  opts = await hook('before-package' , opts);
-  if(!argv['skip-package'])  opts = (await package(opts)) || opts;
-  opts = await hook('after-package' , opts);
+  await hook('before-package' , opts);
+  if(!argv['skip-package'])  (await package(opts)) || opts;
+  await hook('after-package' , opts);
 
 
   // SAM DEPLOYMENT
-  opts = await hook('before-deploy' , opts);
-  if(!argv['skip-deploy'])   opts = (await deploy(opts)) || opts;
-  opts = await hook('after-deploy' , opts);
+  await hook('before-deploy' , opts);
+  if(!argv['skip-deploy'])   (await deploy(opts)) || opts;
+  await hook('after-deploy' , opts);
 
   console.log("Exiting process.");
   process.exit(0);

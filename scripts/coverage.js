@@ -18,7 +18,6 @@ function test(opts){
     console.log("\n",`  TESTING PROJECTS  `.bgCyan.black,"\n");
 
     apps.forEach(app=>{
-      console.log("chdir:",`${config.base_path}/${app}`);
       process.chdir(`${config.base_path}/${app}`);
       exec(config.commands.test,
       (error, stdout, stderr) => {
