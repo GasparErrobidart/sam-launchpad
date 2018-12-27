@@ -21,10 +21,12 @@ if(config.projects) config.base_path = config.projects;
   const args = {
     "verbose" : argv.verbose || false,
     "all-apps" : (apps.length && !allApps) ? false : true,
-    "environment" : argv.stage || "dev",
-    "s3-bucket" : config.project_name,
-    "s3-prefix" : `${args.environment}/${app}`
+    "environment" : argv.stage || "dev"
   };
+
+
+  args["s3-bucket"] = config.project_name,;
+  args["s3-prefix"] = `${args.environment}/${app}`;
 
   const opts =  options({ args, apps, config });
 
