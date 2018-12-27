@@ -1,6 +1,6 @@
 {
   "name": "sam-launchpad",
-  "version": "1.1.7",
+  "version": "1.1.9",
   "description": "A simplified interface for automating common tasks for AWS SAM.",
   "main": "index.js",
   "bin": {
@@ -15,11 +15,16 @@
     "AWS",
     "SAM",
     "Serverless",
-    "CloudFormation",
+    "Cloud Formation",
     "build",
     "test",
     "validate",
-    "deploy"
+    "deploy",
+    "S3",
+    "templates",
+    "Environments",
+    "Stages",
+    "Multi Stack"
   ],
   "repository": {
     "type": "git",

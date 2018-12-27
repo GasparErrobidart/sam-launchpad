@@ -26,7 +26,7 @@ if(config.projects) config.base_path = config.projects;
     "environment" : argv.stage || "dev"
   };
 
-  const opts =  options({ args, apps, config });
+  let opts =  options({ args, apps, config });
 
 
   // UNIT TESTS

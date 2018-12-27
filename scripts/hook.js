@@ -35,8 +35,8 @@ const executeHook = (h,opts)=>{
           try{
             _updatedOpts = JSON.parse(_updatedOpts);
           }catch(e){
-            _updatedOpts = null;
-            console.warn('Your hook command output should be empty or a parsable JSON string.');
+            _updatedOpts = undefined;
+            console.warn('Warning: Your hook command output should be empty or a parsable JSON string.');
           }
         }
 
