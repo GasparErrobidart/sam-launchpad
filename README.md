@@ -174,6 +174,16 @@ Default `dev`
 sam-launchpad --stage qa
 ```
 
+### s3-bucket
+
+Default `${this.project_name}`
+Provide a bucket name where your Lambda code will be deployed, default is the project's name.
+
+### s3-prefix
+
+Default `${this.environment/this.app}`
+Provide an s3-prefix where your Lambda code will be deployed.
+
 ### skip-build
 
 Default `false`
@@ -250,6 +260,45 @@ Default `false`
 ```
 sam-launchpad --verbose
 ```
+
+## Hooks
+
+You can provide additional functions to execute before and after each step:
+```
+// sam-launchpad.config.js
+const join = require('path').join;
+
+module.exports = {
+  "project_name" : "my-serverless-app",
+  ...
+  "commands" : {
+    ...
+  },
+  "hooks" : {
+    "before-build" : [
+      "echo before build",
+      function(opts){
+        // A promise is expected
+        return new Promise((resolve,reject)=>{
+          const {args , apps, config} = opts;
+
+          // Do something
+
+          // You can either pass on the options after changing or adding
+          // attributes.
+          // resolve({args, apps, config});
+
+          //or return nothing to maintain the options received.
+          resolve();
+        })
+      }
+    ]
+  }
+
+}
+```
+
+An array of commands and or functions is expected.
 
 
 ## Project structure
