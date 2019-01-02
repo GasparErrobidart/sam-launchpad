@@ -166,6 +166,10 @@ Required `yes`
 
 You should provide both `test` and `build` commands if you plan on using the recursive execution of these tasks.
 
+#### template_parameters
+
+You can provide extra parameters to your SAM templates.
+
 ## Options
 
 ### stage

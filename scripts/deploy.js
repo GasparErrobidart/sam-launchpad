@@ -19,9 +19,19 @@ function deploy(opts){
 
     console.log("\n",`  DEPLOYING TO CLOUDFORMATION  `.bgYellow.black,"\n");
 
+    let additionalParameters = "";
+
+    if(config.template_parameters){
+      Object.keys(config.template_parameters).forEach(key =>{
+        if(config.template_parameters[key] && !['function','object','undefined'].includes(typeof config.template_parameters[key])){
+          additionalParameters += ` ${key}=${config.template_parameters[key]}`;
+        }
+      })
+    }
+
     apps.forEach(app=>{
       let stackName = `${config.project_name}-${app}-${args.environment}`.replace(/[\W_]+/gi,'-').replace(/\-$/gi,'');
-      exec(`sam deploy --template-file ${config.base_path}/${app}/packaged-${args.environment}.yaml --stack-name ${stackName} --capabilities CAPABILITY_IAM --parameter-overrides Environment=${args.environment} ProjectName=${config.project_name}`,
+      exec(`sam deploy --template-file ${config.base_path}/${app}/packaged-${args.environment}.yaml --stack-name ${stackName} --capabilities CAPABILITY_IAM --parameter-overrides Environment=${args.environment} ProjectName=${config.project_name} ${additionalParameters}`,
       async (error, stdout, stderr) => {
 
           if (error !== null) {
