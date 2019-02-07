@@ -3,6 +3,9 @@
 A simplified interface that automates common tasks for AWS SAM.
 You can maintain multiple projects and environments for each.
 
+
+## Project structure
+
 ```
 my-serverless-project/
 ├── package.json
@@ -14,9 +17,6 @@ my-serverless-project/
     └── user-file-processor
         └── template.yaml
 ```
-
-
-## Project structure
 
 ### Why? My take on serverless
 Serverless projects are often service centered and function oriented. Such modularity calls for a mindful separation of concerns.
@@ -141,14 +141,14 @@ Using multiple stacks is recommended [multi stack approach](https://hackernoon.c
 
 ## Configuration
 
-### project_name
+#### project_name
 
 Required `yes`
 
 Required for naming the Cloud Formation. If you deploy `my-test-app` that has a sub project named `core` to `--stage qa` the resulting stack name would be `my-test-app-core-qa`.
 
 
-### base_path
+#### base_path
 
 Required `yes`
 
@@ -172,7 +172,7 @@ my-serverless-project/
         └── template.yaml
 ```
 
-### projects
+#### projects
 
 An alias for `base_path`.
 
