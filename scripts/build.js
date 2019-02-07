@@ -18,7 +18,6 @@ function build(opts){
     console.log("\n",`  BUILDING PROJECTS  `.bgCyan.black,"\n");
 
     apps.forEach(app=>{
-      console.log(`${config.base_path}/${app}`);
       process.chdir(`${config.base_path}/${app}`);
       exec(config.commands.build,
       (error, stdout, stderr) => {

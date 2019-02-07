@@ -15,6 +15,22 @@ my-serverless-project/
         └── template.yaml
 ```
 
+
+## Project structure
+
+### Why? My take on serverless
+Serverless projects are often service centered and function oriented. Such modularity calls for a mindful separation of concerns.
+Creating a new serverless project for each module of functionality might not be necessary, it could downgrade performance, increase financial costs and time spent on maintainability.
+
+On the other hand if you don't modularize enough you might end up with a monolithic piece of software. This should be self-explanatory, monolithic architectures and serverless are like oil and water. Putting in some examples: Serverless scales with each use, if you need to spin a bunch of modules just to access an specific functionality you'll be unnecessarily incrementing the time required for completing said operation (thus downgrading performance and increasing costs).
+
+For deployment of new features and code, with AWS you update or create stacks using Cloud Formation, having coupled code means that you'll have to deploy everything every time.
+
+### Using sub-projects. Finding the balance is key
+How to find the balance when splitting your code into: libraries, lambda functions and sub-projects is up to the developers and the project nature.
+The root project works as a wrapper for all the sub-projects, providing automation scripts for recurrent tasks (building, testing, validating templates, packaging projects and deploying with SAM).
+
+
 ## Getting what you'll need
 
 Before you start you'll need to get all this dependencies.
@@ -67,7 +83,7 @@ module.exports = {
 
 - If you run `sam-launchpad` it will `build` and `test` each of your projects with the commands you provided on the config. After that it'll continue `validating`, `packaging` and `deploying` using `sam-cli` commands.
 
-- If you installed SAM-Launchpad locally in your project you can run it using `npm` or `/node_modules/bin/launch-pad`.
+- If you installed SAM-Launchpad locally in your project you can run it using `npm` or `/node_modules/bin/sam-launchpad`.
 
 - If you installed it globally in your machine just run `sam-launchpad`.
 
@@ -296,17 +312,15 @@ module.exports = {
 
 An array of commands and or functions is expected.
 
+### Available hooks
 
-## Project structure
-
-### Why? My take on serverless
-Serverless projects are often service centered and function oriented. Such modularity calls for a mindful separation of concerns.
-Creating a new serverless project for each module of functionality might not be necessary, it could downgrade performance, increase financial costs and time spent on maintainability.
-
-On the other hand if you don't modularize enough you might end up with a monolithic piece of software. This should be self-explanatory, monolithic architectures and serverless are like oil and water. Putting in some examples: Serverless scales with each use, if you need to spin a bunch of modules just to access an specific functionality you'll be unnecessarily incrementing the time required for completing said operation (thus downgrading performance and increasing costs).
-
-For deployment of new features and code, with AWS you update or create stacks using Cloud Formation, having coupled code means that you'll have to deploy everything every time.
-
-### Using sub-projects. Finding the balance is key
-How to find the balance when splitting your code into: libraries, lambda functions and sub-projects is up to the developers and the project nature.
-The root project works as a wrapper for all the sub-projects, providing automation scripts for recurrent tasks (building, testing, validating templates, packaging projects and deploying with SAM).
+- `before-test`
+- `after-test`
+- `before-build`
+- `after-build`
+- `before-validation`
+- `after-validation`
+- `before-package`
+- `after-package`
+- `before-deploy`
+- `after-deploy`

@@ -30,34 +30,54 @@ if(config.projects) config.base_path = config.projects;
 
 
   // UNIT TESTS
-  await hook( 'before-coverage' , opts );
-  if(!argv['skip-coverage']) (await coverage(opts)) || opts;
-  await hook( 'after-coverage' , opts );
+
+  if(!argv['skip-coverage']){
+    await hook( 'before-coverage' , opts );
+    (await coverage(opts)) || opts;
+    await hook( 'after-coverage' , opts );
+  }
+
 
 
   // BUILD
-  await hook('before-build' , opts);
-  if(!argv['skip-build'])    (await build(opts)) || opts;
-  await hook('after-build' , opts);
+
+  if(!argv['skip-build']){
+    await hook('before-build' , opts);
+    (await build(opts)) || opts;
+    await hook('after-build' , opts);
+  }
+
 
 
   // SAM TEMPLATE VALIDATION
-  await hook('before-validation' , opts);
-  if(!argv['skip-validation']) (await validate(opts)) || opts;
-  await hook('after-validation' , opts);
+
+  if(!argv['skip-validation']){
+    await hook('before-validation' , opts);
+    (await validate(opts)) || opts;
+    await hook('after-validation' , opts);
+  }
+
 
 
   // SAM PACKAGE
-  await hook('before-package' , opts);
-  if(!argv['skip-package'])  (await package(opts)) || opts;
-  await hook('after-package' , opts);
+
+  if(!argv['skip-package']){
+    await hook('before-package' , opts);
+    (await package(opts)) || opts;
+    await hook('after-package' , opts);
+  }
+
 
 
   // SAM DEPLOYMENT
-  await hook('before-deploy' , opts);
-  if(!argv['skip-deploy'])   (await deploy(opts)) || opts;
-  await hook('after-deploy' , opts);
 
-  console.log("Exiting process.");
+  if(!argv['skip-deploy']){
+    await hook('before-deploy' , opts);
+    (await deploy(opts)) || opts;
+    await hook('after-deploy' , opts);
+  }
+
+
+  console.log("[SAM LAUNCHPAD]: Exiting process.");
   process.exit(0);
 })();
