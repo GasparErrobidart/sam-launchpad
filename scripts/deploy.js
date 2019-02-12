@@ -24,7 +24,7 @@ function deploy(opts){
     if(config.template_parameters){
       Object.keys(config.template_parameters).forEach(key =>{
         if(config.template_parameters[key] && !['function','object','undefined'].includes(typeof config.template_parameters[key])){
-          additionalParameters += ` ${key}=${config.template_parameters[key]}`;
+          additionalParameters += ` ${key}="${config.template_parameters[key]}"`;
         }
       })
     }
