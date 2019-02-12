@@ -23,7 +23,8 @@ if(config.projects) config.base_path = config.projects;
   const args = {
     "verbose" : argv.verbose || false,
     "all-apps" : (apps.length && !allApps) ? false : true,
-    "environment" : argv.stage || "dev"
+    "environment" : argv.stage || "dev",
+    "stop-on-error" : argv['stop-on-error'] || false
   };
 
   let opts =  options({ args, apps, config });

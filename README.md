@@ -196,6 +196,15 @@ Default `dev`
 sam-launchpad --stage qa
 ```
 
+### stop-on-error
+
+Default `false`
+It will exit project with code 1 if an error is found.
+
+```
+sam-launchpad --stop-on-error
+```
+
 ### skip-build
 
 Default `false`
