@@ -176,6 +176,10 @@ my-serverless-project/
 
 An alias for `base_path`.
 
+#### single_project
+
+If `true` base_path will be the project directory.
+
 #### Commands
 
 Required `yes`
@@ -203,14 +207,6 @@ It will exit project with code 1 if an error is found.
 
 ```
 sam-launchpad --stop-on-error
-```
-
-### single-project
-
-Default `false`
-
-```
-sam-launchpad --single-project
 ```
 
 ### skip-build

@@ -9,12 +9,12 @@ function options(opts){
   args.environment = args.environment || 'dev';
 
   apps = apps || [];
-  if(args['single-project']){
+  if(config.single_project){
     apps = [""];
   }else if(args['all-apps']){
     apps = getAllApps(config.base_path);
   }
-  
+
   if(apps.length < 1){
     console.log("The provided array of app names is empty.".bgYellow.black);
   }
