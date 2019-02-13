@@ -24,7 +24,8 @@ if(config.projects) config.base_path = config.projects;
     "verbose" : argv.verbose || false,
     "all-apps" : (apps.length && !allApps) ? false : true,
     "environment" : argv.stage || "dev",
-    "stop-on-error" : argv['stop-on-error'] || false
+    "stop-on-error" : argv['stop-on-error'] || false,
+    "single-project" : argv['single-project'] || false
   };
 
   let opts =  options({ args, apps, config });

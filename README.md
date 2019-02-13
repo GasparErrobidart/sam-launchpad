@@ -205,6 +205,14 @@ It will exit project with code 1 if an error is found.
 sam-launchpad --stop-on-error
 ```
 
+### single-project
+
+Default `false`
+
+```
+sam-launchpad --single-project
+```
+
 ### skip-build
 
 Default `false`
