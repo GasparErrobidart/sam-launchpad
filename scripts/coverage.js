@@ -27,7 +27,7 @@ function test(opts){
             errors.push({app,error,stderr});
           }else{
             console.log(`  ✔ ${app}  `.green);
-            // console.log(stdout);
+            console.log(stdout);
           }
 
           completed++;
