@@ -10,7 +10,7 @@ describe('deploy', () => {
   const MOCK_RESPONSES_CHILD_PROCESS = [
     {
       method : "exec",
-      key : `sam deploy --template-file serverless/test/packaged-test.yaml --stack-name my-serverless-test-test --capabilities CAPABILITY_IAM --parameter-overrides Environment=test ProjectName=my-serverless`,
+      key : `sam deploy --template-file serverless/test/template.yaml --s3-bucket my-serverless --s3-prefix test/test --stack-name my-serverless-test-test --capabilities CAPABILITY_IAM --parameter-overrides Environment=test ProjectName=my-serverless`,
       data : (cb)=> cb(null,true,null) // error, stdout, stderr
     },
     {
