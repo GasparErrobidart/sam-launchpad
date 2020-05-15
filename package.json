@@ -1,6 +1,6 @@
 {
   "name": "sam-launchpad",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A simplified interface for automating common tasks for AWS SAM.",
   "main": "index.js",
   "bin": {
